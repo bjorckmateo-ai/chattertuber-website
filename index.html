@@ -3,28 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChatterTuber</title>
+    <title>ChatterTuber — The Local Guide That Speaks Your Language</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            background-color: #0a1628;
+            background-color: #080f1e;
             color: #ffffff;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
         }
         .navbar {
-            background-color: #0a1628;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding: 16px 0;
+            background-color: rgba(8, 15, 30, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            padding: 18px 0;
+            transition: all 0.3s ease;
         }
         .navbar-brand {
             color: #ffffff;
-            font-weight: 700;
-            font-size: 1.4rem;
+            font-weight: 800;
+            font-size: 1.3rem;
+            letter-spacing: -0.5px;
         }
         .nav-link {
-            color: rgba(255,255,255,0.8) !important;
-            margin-left: 24px;
+            color: rgba(255,255,255,0.7) !important;
+            margin-left: 32px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
         }
+        .nav-link:hover { color: #ffffff !important; }
+        .btn-ask {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-left: 24px;
+            transition: background 0.2s;
+        }
+        .btn-ask:hover { background: #1d4ed8; color: white; }
         #hero {
             min-height: 100vh;
             display: flex;
@@ -32,98 +55,173 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 120px 20px;
+            padding: 140px 24px 100px;
+            position: relative;
+            background: radial-gradient(ellipse at 55% 1%, rgba(39, 95, 225, 0.15) 0%, transparent 70%);
+        }
+        .hero-tag {
+            display: inline-block;
+            background: rgba(37, 99, 235, 0.15);
+            border: 1px solid rgba(37, 99, 235, 0.4);
+            color: #60a5fa;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 6px 16px;
+            border-radius: 100px;
+            margin-bottom: 32px;
         }
         #hero h1 {
-            font-size: 4rem;
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+            max-width: 900px;
+        }
+        #hero h1 span { color: #2563eb; }
+        #hero p {
+            font-size: 1.25rem;
+            opacity: 0.6;
+            max-width: 580px;
+            line-height: 1.7;
+            margin-bottom: 48px;
+        }
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-primary-hero {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .btn-primary-hero:hover {
+            background: #1d4ed8;
+            color: white;
+            transform: translateY(-1px);
+        }
+        .btn-secondary-hero {
+            background: rgba(255,255,255,0.06);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.12);
+            padding: 14px 32px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .btn-secondary-hero:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+        section { padding: 120px 0; }
+        .section-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #2563eb;
+            margin-bottom: 16px;
+        }
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
             font-weight: 800;
+            letter-spacing: -1px;
             line-height: 1.1;
             margin-bottom: 24px;
         }
-        #hero p {
-            font-size: 1.4rem;
-            opacity: 0.7;
-        }
-        section {
-            padding: 100px 0;
-        }
-        #problem {
-            background-color: #0d1f3c;
-        }
-        #solution {
-            background-color: #0a1628;
-        }
-        #audiences {
-            background-color: #0d1f3c;
-        }
-        #built {
-            background-color: #0a1628;
-        }
-        h2 {
-            font-size: 2.8rem;
-            font-weight: 800;
-            margin-bottom: 24px;
-        }
-        p {
+        .section-body {
             font-size: 1.1rem;
-            opacity: 0.75;
-            max-width: 700px;
+            opacity: 0.65;
+            max-width: 580px;
+            line-height: 1.8;
+        }
+        #problem { background-color: #080f1e; }
+        #solution { background-color: #0a1525; }
+        #audiences { background-color: #080f1e; }
+        #built { background-color: #0a1525; }
+        .section-divider {
+            width: 48px;
+            height: 3px;
+            background: #2563eb;
+            border-radius: 2px;
+            margin-bottom: 32px;
+        }
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .signup-float {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-decoration: none;
+            box-shadow: 0 8px 32px rgba(37, 99, 235, 0.4);
+            z-index: 999;
+            transition: all 0.2s;
+        }
+        .signup-float:hover {
+            background: #1d4ed8;
+            color: white;
+            transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
+    <div id="navbar"></div>
+    <div id="hero"></div>
+    <div id="problem"></div>
+    <div id="solution"></div>
+    <div id="audiences"></div>
+    <div id="built"></div>
 
-    <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">ChatterTuber</a>
-            <div class="navbar-nav ms-auto">
-                <a class="nav-link" href="#problem">Problem</a>
-                <a class="nav-link" href="#solution">Solution</a>
-                <a class="nav-link" href="#audiences">Audiences</a>
-                <a class="nav-link" href="#built">Built</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- HERO -->
-    <section id="hero">
-        <h1>The Local Guide That Speaks Your Language</h1>
-        <p>Built Once. Localised Everywhere.</p>
-    </section>
-
-    <!-- PROBLEM -->
-    <section id="problem">
-        <div class="container">
-            <h2>The Problem</h2>
-            <p>Tourists arrive in a new place and have no idea where to go. Local knowledge is locked inside people's heads. Businesses miss customers because they can't communicate at scale.</p>
-        </div>
-    </section>
-
-    <!-- SOLUTION -->
-    <section id="solution">
-        <div class="container">
-            <h2>The Solution</h2>
-            <p>ChatterTuber turns trusted local knowledge into a digital human people can talk to — through any browser, in any language, with no app required.</p>
-        </div>
-    </section>
-
-    <!-- AUDIENCES -->
-    <section id="audiences">
-        <div class="container">
-            <h2>Who It's For</h2>
-            <p>Visitors. Locals. Businesses. Councils. Anyone who needs trusted local information delivered conversationally.</p>
-        </div>
-    </section>
-
-    <!-- BUILT -->
-    <section id="built">
-        <div class="container">
-            <h2>Built Different</h2>
-            <p>Powered by curated local knowledge. Speaks your language. No app download. No specialist hardware. Just a conversation.</p>
-        </div>
-    </section>
+    <a href="#signup" class="signup-float">Register Interest →</a>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const views = ['navbar', 'hero', 'problem', 'solution', 'audiences', 'built'];
+        views.forEach(view => {
+            fetch(`views/${view}.html`)
+                .then(res => res.text())
+                .then(html => {
+                    document.getElementById(view).innerHTML = html;
+                });
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        setTimeout(() => {
+            document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+        }, 500);
+    </script>
 </body>
 </html>
