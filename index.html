@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Page settings -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChatterTuber</title>
+  <!-- Switzer Font -->
+   <style> 
+  
+      /* reset default broswer styles */
+      *{margin:0;padding:0;box-sizing:border-box;
+      }
+      /* base body styles */
+      body {
+        font-family: 'Switzer', sans-serif;
+        line-height: 1.6;
+        color: #ffffff;
+        background-color: #000000;
+      }
+        /*Nabar styles */
+        .navbar {
+          display: flex;
+          justify-content: space-between;
+          align-items:center;
+          padding: 16px 40px;
+          position: fixed; top: 0; left: 0; right: 0;
+          background: rgba(9,9,9,0.8);
+          backdrop-filter:blur(12px);
+          border-bottom: 0.8px solid rgba(46, 45, 45, 0.8);
+          
+          
+        }
+        .links a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    margin-left: 28px;
+    font-size: 14px;
+}
+.cta button {
+  background: #4ade80; 
+  color: #000000;
+  padding: 10px 20px;
+  border-radius: 95px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  padding: 0 80px;
+}
+
+.hero-left h1 {
+  font-size: 76px;
+  line-height: 1.10;
+  max-width: 700px;
+  font-family: 'Switzer', sans-serif;
+font-weight: 600;
+}
+
+.hero-left p {
+  font-size: 17px;
+  max-width: 600px;
+  margin-top: 26px;
+  color: rgba(171, 174, 175, 0.71);
+  white-space: nowrap;
+}
+
+.highlight {
+  background: linear-gradient(90deg, #4ade80, #22d3ee);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.hero-content {
+  display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.hero-right {
+  position: relative;
+  width: 320px;
+  height: 320px;
+}
+
+.char-card {
+  position: absolute;
+  inset: 0;
+  border-radius: 24px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  opacity: 0;
+  z-index: 1;
+  animation: cardCycle 9s ease-in-out infinite;
+  box-shadow: 0 30px 60px rgba(525, 525, 525, 0.12);
+  border: 0.8px solid rgba(46, 45, 45, 0.8);
+}
+
+.card-1 {
+  background: #d1fae5;
+  animation-delay: 0s;
+}
+
+.card-2 {
+  background: #c7ade9;
+  animation-delay: 3s;
+}
+
+.card-3 {
+  background: #fef3c7;
+  animation-delay: 6s;
+}
+
+.char-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #000000;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.char-label {
+  color: #0a0a0a;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.rotating-tag {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+#rotating-word {
+  display: inline-block;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#rotating-word. fade-out {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.floating-quote {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: none;
+  color: #9ea4a4;
+  padding: 10px 18px;
+  border-radius: 14px;
+  font-size: 14px;
+  font-style: italic;
+  white-space: nowrap;
+  opacity: 0;
+  animation: cardCycle 9s ease-in-out infinite;
+}
+
+.quote-1 {animation-delay: 0s; }
+.quote-2 {animation-delay: 3s; }
+.quote-3 {animation-delay: 6s; }
+
+.ghost-box {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) scale(0.85);
+    width: 320px;
+    height: 320px;
+    border-radius: 24px;
+    filter: blur(4px);
+    opacity: 0.3;
+    z-index: 0;
+}
+
+.ghost-top {
+    top: -30px;
+    background: #c7ade9;
+}
+
+.ghost-bottom {
+    bottom: -30px;
+    background: #fef3c7;
+}
+
+@keyframes cardCycle {
+  0% {opacity: 0; filter: blur(10px); }
+  5% { opacity: 1; filter: blur(0px); }
+    28% { opacity: 1; filter: blur(0px); }
+    33% { opacity: 0; filter: blur(10px); }
+    100% { opacity: 0; }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 12px 20px;
+    }
+    .links {
+        display: none;
+    }
+    .hero {
+        padding: 0 24px;
+    }
+    .hero-left h1 {
+        font-size: 40px;
+    }
+    .hero-left p {
+        white-space: normal;
+        font-size: 15px;
+    }
+}
+      
+     
+    /* Switzer font - same as Clay.com */
+   </style>
+   <link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700,800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- ==== NAVBAR ==== -->
+   <nav class="navbar">
+    <div class="brand">ChatterTuber</div>
+    <div class="links">
+      <a href="#problem">Problem</a>
+      <a href="#solution">Solution</a>
+      <a href="#signup">Sign Up</a>
+      <a href="#audiences">Audiences</a>
+    </div>
+    <div class="cta">
+    <button>Talk to Brian</button>
+</div>
+  </nav>
+      
+  <!-- ==== HERO SECTION ===- -->
+   <section class="hero">
+    <div class="herobg"></div>
+      <div class="hero-content">
+      <div class="hero-left">
+       
+          <h1>The AI <span id="rotating-word" class="highlight">guide</span><br>that speaks your language, instantly.</h1>
+          <p>Experience the world through the eyes of a local expert who speaks your language fluently.</p>
+        </div>
+        <div class="hero-right">
+          <div class="ghost-box ghost-top"></div>
+<div class="ghost-box ghost-bottom"></div>
+          <p class="floating-quote quote-1">"Ask me anything about this place - I've got you 😉"</p>
+          <div class="char-card card-1">
+    <div class="card-number">01</div>
+    <div class="char-avatar">B</div>
+    <p class="char-name">Brian</p>
+    <p class="char-role">The Local Expert</p>
+</div>
+<p class="floating-quote quote-2">"I can help you find the best local spots and hidden restaurants!"</p> 
+            <div class="char-card card-2">
+              <div class="card-number">02</div>
+              <div class="char-avatar">s</div>
+              <p class="char-name">Sarah</p>
+              <p class="char-role">The Hospitality Expert</p>
+            </div>
+
+<p class="floating-quote quote-3">"Let me show you the best hiking trails and scenic viewpoints!"</p>
+              <div class="char-card card-3">
+                <div class="card-number">03</div>
+                <div class="char-avatar">M</div>
+                <p class=" char-name">Marco</p>
+                <p class="char-role">The Trail Guide</p>
+              </div>
+        </div>  
+
+
+              </div>
+            </div>
+          </div>
+    </section>
+  
+<script>
+  const words = ["guide", "assistant", "helper", "navigator", "recommender", "expert"];
+  let index = 0;
+   const wordElement = document.getElementById("rotating-word");
+
+
+   setInterval(() => {
+    wordElement.classList.add("fade-out");
+   
+   setTimeout(() => {
+    index = (index + 1) % words.length;
+    wordElement.textContent = words[index];
+    wordElement.classList.remove(fade-out);
+   }, 300);
+
+  }, 2500); 
+</script>   
+
+</body>
+</html>  
+
+
