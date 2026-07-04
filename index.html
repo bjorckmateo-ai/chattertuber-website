@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ChatterTuber — Talk to Brian</title>
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700,800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #0a0a0a; }
+  body { font-family: 'Switzer', -apple-system, sans-serif; color: #fff; overflow-x: hidden; min-height: 100vh; }
+
+  /* NAVBAR */
+  .navbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 40px;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    background: rgba(9,9,9,0.75);
+    backdrop-filter: blur(14px);
+    border-bottom: 0.8px solid rgba(255,255,255,0.08);
+  }
+  .brand { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; }
+  .links { display: flex; flex-wrap: wrap; align-items: center; gap: 28px; }
+  .links a { color: rgba(255,255,255,0.65); text-decoration: none; font-size: 14px; }
+  .nav-cta {
+    background: #4ade80; color: #0a0a0a; padding: 10px 22px; border: none;
+    border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600;
+    font-family: inherit; white-space: nowrap; transition: background 0.18s ease;
+  }
+  .nav-cta:hover { background: #6ee7a4; }
+
+  /* HERO */
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 120px clamp(24px,6vw,80px) 60px;
+  }
+  .hero-inner {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: 40px; width: 100%; max-width: 1280px; margin: 0 auto;
+  }
+  .hero-left { flex: 1 1 380px; max-width: 600px; }
+  .eyebrow {
+    font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    color: #4ade80; margin-bottom: 18px;
+  }
+  .hero-left h1 {
+    font-size: clamp(36px,5.2vw,72px); line-height: 1.05; font-weight: 600; letter-spacing: -0.02em;
+  }
+  #rotating-word {
+    color: #4ade80; display: inline-block;
+    transition: opacity 0.28s ease, transform 0.28s ease;
+  }
+  #rotating-word.fade-out { opacity: 0; transform: translateY(6px) scale(0.94); }
+  .hero-left p {
+    font-size: clamp(15px,1.8vw,17px); max-width: 520px; margin-top: 24px;
+    color: rgba(171,174,175,0.75);
+  }
+  .hero-cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; }
+  .btn-primary {
+    background: #4ade80; color: #0a0a0a; border: none; padding: 15px 26px; border-radius: 8px;
+    font-size: 15px; font-weight: 600; font-family: inherit; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: transform 0.18s ease, background 0.18s ease;
+  }
+  .btn-primary:hover { background: #6ee7a4; transform: translateY(-2px); }
+  .btn-secondary {
+    background: transparent; color: #fff; border: 0.8px solid rgba(255,255,255,0.2);
+    padding: 15px 26px; border-radius: 8px; font-size: 15px; font-weight: 600;
+    font-family: inherit; cursor: pointer;
+    transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+  }
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.05); transform: translateY(-2px); }
+
+  /* PERSONA STACK */
+  .hero-right { flex: 0 1 300px; display: flex; flex-direction: column; align-items: center; gap: 22px; }
+  .stack-label {
+    display: flex; align-items: center; gap: 10px; font-size: 12px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: rgba(255,255,255,0.4); font-weight: 600;
+  }
+  .stack-label span.line { width: 22px; height: 1px; background: rgba(255,255,255,0.25); display: inline-block; }
+  .stack {
+    position: relative; width: min(300px,78vw); height: min(360px,60vw);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .ghost-peek {
+    position: absolute; z-index: 0; inset: 0; border-radius: 20px;
+    background: #131313; border: 0.8px solid rgba(255,255,255,0.08);
+  }
+  .ghost-top { transform: translateY(-14px) scale(0.94); }
+  .ghost-bottom { transform: translateY(14px) scale(0.94); }
+
+  .char-card {
+    position: absolute; z-index: 1; inset: 0; border-radius: 20px; padding: 28px;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; opacity: 0; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    border: 0.8px solid rgba(0,0,0,0.08);
+    animation: cardSlide 9s ease-in-out infinite;
+  }
+  .card-1 { background: #d1fae5; animation-delay: 0s; }
+  .card-2 { background: #ddd6fe; animation-delay: 3s; }
+  .card-3 { background: #fef3c7; animation-delay: 6s; }
+
+  .char-avatar-box {
+    width: 72px; height: 72px; border-radius: 12px; background-color: #0a0a0a;
+    background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.07) 0px, rgba(255,255,255,0.07) 2px, transparent 2px, transparent 10px);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.5); font-family: monospace; font-size: 9px; text-align: center; margin-bottom: 16px;
+  }
+  .char-name { color: #0a0a0a; font-size: 17px; font-weight: 700; }
+  .char-role { color: rgba(10,10,10,0.55); font-size: 12.5px; margin-top: 2px; font-weight: 500; }
+  .char-quote {
+    color: rgba(10,10,10,0.5); font-size: 12.5px; font-style: italic; margin-top: 14px;
+    max-width: 200px; line-height: 1.4;
+  }
+
+  .stack-footer { font-size: 13px; color: rgba(255,255,255,0.4); text-align: center; max-width: 260px; }
+
+  @keyframes cardSlide {
+    0%   { opacity: 0; filter: blur(7px); transform: translateY(-70px) scale(0.95); }
+    9%   { opacity: 1; filter: blur(0px); transform: translateY(0) scale(1); }
+    30%  { opacity: 1; filter: blur(0px); transform: translateY(0) scale(1); }
+    40%  { opacity: 0; filter: blur(7px); transform: translateY(70px) scale(0.95); }
+    100% { opacity: 0; transform: translateY(70px); }
+  }
+
+  /* TAGLINE SECTION */
+  .tagline-section {
+    padding: 90px clamp(24px,6vw,80px); text-align: center;
+    border-top: 0.8px solid rgba(255,255,255,0.08);
+  }
+  .tagline-section h2 {
+    font-size: clamp(28px,4vw,48px); font-weight: 600; letter-spacing: -0.02em; line-height: 1.15;
+    max-width: 720px; margin: 0 auto;
+  }
+  .tagline-section h2 span { color: #4ade80; }
+  .tagline-section p {
+    margin-top: 18px; font-size: 16px; color: rgba(255,255,255,0.55);
+    max-width: 480px; margin-left: auto; margin-right: auto;
+  }
+
+  @media (max-width: 768px) {
+    .navbar { padding: 12px 20px; }
+    .links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ==== NAVBAR ==== -->
+  <nav class="navbar">
+    <div class="brand">ChatterTuber</div>
+    <div class="links">
+      <a href="#problem">Problem</a>
+      <a href="#solution">Solution</a>
+      <a href="#signup">Sign Up</a>
+      <a href="#audiences">Audiences</a>
+    </div>
+    <button class="nav-cta">Talk to Brian</button>
+  </nav>
+
+  <!-- ==== HERO ==== -->
+  <section class="hero">
+    <div class="hero-inner">
+
+      <!-- Left: copy -->
+      <div class="hero-left">
+        <div class="eyebrow">ChatterTuber</div>
+        <h1>
+          The AI <span id="rotating-word">guide</span><br>that speaks your language, instantly.
+        </h1>
+        <p>Meet Brian, Sarah and Marco — AI guides who know every city like a local, ready to answer anything, in your language, day or night.</p>
+        <div class="hero-cta">
+          <button class="btn-primary">Talk to Brian →</button>
+          <button class="btn-secondary">See how it works</button>
+        </div>
+      </div>
+
+      <!-- Right: persona stack -->
+      <div class="hero-right">
+        <div class="stack-label">
+          <span class="line"></span>
+          Meet your guides
+        </div>
+
+        <div class="stack">
+          <!-- ghost peeks -->
+          <div class="ghost-peek ghost-top"></div>
+          <div class="ghost-peek ghost-bottom"></div>
+
+          <!-- cards -->
+          <div class="char-card card-1">
+            <div class="char-avatar-box">brian.png</div>
+            <p class="char-name">Brian</p>
+            <p class="char-role">The Local Expert</p>
+            <p class="char-quote">"Ask me anything about this place — I've got you."</p>
+          </div>
+
+          <div class="char-card card-2">
+            <div class="char-avatar-box">sarah.png</div>
+            <p class="char-name">Sarah</p>
+            <p class="char-role">The Hospitality Expert</p>
+            <p class="char-quote">"I'll find the best local spots and hidden restaurants."</p>
+          </div>
+
+          <div class="char-card card-3">
+            <div class="char-avatar-box">marco.png</div>
+            <p class="char-name">Marco</p>
+            <p class="char-role">The Trail Guide</p>
+            <p class="char-quote">"Let's find the best trails and scenic viewpoints."</p>
+          </div>
+        </div>
+
+        <div class="stack-footer">One assistant. Three specialities.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==== TAGLINE ==== -->
+  <section class="tagline-section">
+    <h2>Built once, <span>localised anywhere.</span></h2>
+    <p>One guide, every language, every city — no rebuilding required.</p>
+  </section>
+
+<script>
+  const words = ["guide", "assistant", "helper", "navigator", "expert"];
+  let index = 0;
+  const wordElement = document.getElementById("rotating-word");
+
+  setInterval(() => {
+    wordElement.classList.add("fade-out");
+    setTimeout(() => {
+      index = (index + 1) % words.length;
+      wordElement.textContent = words[index];
+      wordElement.classList.remove("fade-out");
+    }, 280);
+  }, 2600);
+</script>
+
+</body>
+</html>
