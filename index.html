@@ -1,16 +1,22 @@
+
+Index · HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ChatterTuber — Talk to Brian</title>
-<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700,800&display=swap" rel="stylesheet"><div style="width: 280px">
-</div>
+<meta name="description" content="ChatterTuber turns trusted local knowledge into a conversational AI avatar — any browser, any language, no app required. Ask Brian anything about your destination.">
+<link rel="icon" href="images/favicon.png">
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700,800&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   html, body { background: #f0f0f2; }
 body { font-family: 'Switzer', -apple-system, sans-serif; color: #0a0a0a; }
-
+  ::selection { background: #4ade80; color: #0a0a0a; }
+  a.btn-primary, a.btn-secondary { text-decoration: none; }
+ 
   /* NAVBAR */
   .navbar {
     display: flex;
@@ -28,14 +34,16 @@ body { font-family: 'Switzer', -apple-system, sans-serif; color: #0a0a0a; }
   }
   .brand { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; }
   .links { display: flex; flex-wrap: wrap; align-items: center; gap: 28px; }
-  .links a { color: rgba(10,10,10,0.65); text-decoration: none; font-size: 14px; }
+  .links a { color: rgba(10,10,10,0.65); text-decoration: none; font-size: 14px; transition: color 0.15s ease; }
+  .links a:hover { color: #0a0a0a; }
   .nav-cta {
     background: #4ade80; color: #0a0a0a; padding: 10px 22px; border: none;
     border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600;
     font-family: inherit; white-space: nowrap; transition: background 0.18s ease;
+    text-decoration: none; display: inline-block;
   }
   .nav-cta:hover { background: #6ee7a4; }
-
+ 
   /* HERO */
   .hero {
     min-height: 100svh;
@@ -78,44 +86,44 @@ body { font-family: 'Switzer', -apple-system, sans-serif; color: #0a0a0a; }
     background: transparent; color: #0a0a0a; border: 0.8px solid rgba(0,0,0,0.15);
     padding: 15px 26px; border-radius: 8px; font-size: 15px; font-weight: 600;
     font-family: inherit; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px;
     transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
   }
-  .btn-secondary:hover { border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.05); transform: translateY(-2px); }
-
+  .btn-secondary:hover { border-color: rgba(0,0,0,0.4); background: rgba(0,0,0,0.03); transform: translateY(-2px); }
+ 
   /* PERSONA STACK */
   .hero-right { flex: 0 1 300px; display: flex; flex-direction: column; align-items: center; gap: 22px; }
   .stack-label {
     display: flex; align-items: center; gap: 10px; font-size: 12px; letter-spacing: 0.08em;
-    text-transform: uppercase; color: rgba(255,255,255,0.4); font-weight: 600;
+    text-transform: uppercase; color: rgba(0,0,0,0.4); font-weight: 600;
   }
-  .stack-label span.line { width: 22px; height: 1px; background: rgba(255,255,255,0.25); display: inline-block; }
+  .stack-label span.line { width: 22px; height: 1px; background: rgba(0,0,0,0.25); display: inline-block; }
   .stack {
     position: relative; width: min(300px,78vw); height: min(360px,60vw);
     display: flex; align-items: center; justify-content: center;
   }
   .ghost-peek {
     position: absolute; z-index: 0; inset: 0; border-radius: 20px;
-    background: #131313; border: 0.8px solid rgba(255,255,255,0.08);
+    background: #e4e4e7; border: 0.8px solid rgba(0,0,0,0.06);
   }
   .ghost-top { transform: translateY(-14px) scale(0.94); }
   .ghost-bottom { transform: translateY(14px) scale(0.94); }
-
+ 
   .char-card {
     position: absolute; z-index: 1; inset: 0; border-radius: 20px; padding: 28px;
     display: flex; flex-direction: column; justify-content: center; align-items: center;
-    text-align: center; opacity: 0; box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    text-align: center; opacity: 0; box-shadow: 0 20px 40px rgba(0,0,0,0.15);
     border: 0.8px solid rgba(0,0,0,0.08);
     animation: cardSlide 9s ease-in-out infinite;
   }
   .card-1 { background: #d1fae5; animation-delay: 0s; }
   .card-2 { background: #ddd6fe; animation-delay: 3s; }
   .card-3 { background: #fef3c7; animation-delay: 6s; }
-
-  .char-avatar-box {
-    width: 72px; height: 72px; border-radius: 12px; background-color: #0a0a0a;
-    background-image: repeating-linear-gradient(135deg, rgba(255,255,255,0.07) 0px, rgba(255,255,255,0.07) 2px, transparent 2px, transparent 10px);
+ 
+  .char-avatar {
+    width: 72px; height: 72px; border-radius: 50%; background: #0a0a0a;
     display: flex; align-items: center; justify-content: center;
-    color: rgba(255,255,255,0.5); font-family: monospace; font-size: 9px; text-align: center; margin-bottom: 16px;
+    color: #ffffff; font-size: 26px; font-weight: 800; margin-bottom: 16px;
   }
   .char-name { color: #0a0a0a; font-size: 17px; font-weight: 700; }
   .char-role { color: rgba(10,10,10,0.55); font-size: 12.5px; margin-top: 2px; font-weight: 500; }
@@ -123,9 +131,9 @@ body { font-family: 'Switzer', -apple-system, sans-serif; color: #0a0a0a; }
     color: rgba(10,10,10,0.5); font-size: 12.5px; font-style: italic; margin-top: 14px;
     max-width: 200px; line-height: 1.4;
   }
-
-  .stack-footer { font-size: 13px; color: rgba(255,255,255,0.4); text-align: center; max-width: 260px; }
-
+ 
+  .stack-footer { font-size: 13px; color: rgba(0,0,0,0.4); text-align: center; max-width: 260px; }
+ 
   @keyframes cardSlide {
     0%   { opacity: 0; filter: blur(7px); transform: translateY(-70px) scale(0.95); }
     9%   { opacity: 1; filter: blur(0px); transform: translateY(0) scale(1); }
@@ -133,11 +141,10 @@ body { font-family: 'Switzer', -apple-system, sans-serif; color: #0a0a0a; }
     40%  { opacity: 0; filter: blur(7px); transform: translateY(70px) scale(0.95); }
     100% { opacity: 0; transform: translateY(70px); }
   }
-
+ 
   /* TAGLINE SECTION */
   .tagline-section {
     padding: 90px clamp(24px,6vw,80px); text-align: center;
-    border-top: 0.8px solid rgba(255,255,255,0.08);
   }
   .tagline-section h2 {
     font-size: clamp(28px,4vw,48px); font-weight: 600; letter-spacing: -0.02em; line-height: 1.15;
@@ -148,16 +155,8 @@ body { font-family: 'Switzer', -apple-system, sans-serif; color: #0a0a0a; }
     margin-top: 18px; font-size: 16px; color: rgba(0,0,0,0.5);
     max-width: 480px; margin-left: auto; margin-right: auto;
   }
-
-  /* INTRO */
-.intro-section { padding: 140px clamp(24px,6vw,80px) 140px; background: #f0f0f2; max-width: 1100px; margin: 0 auto; }
-.intro-section h2 { font-size: clamp(36px,5.5vw,76px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.08; color: #0a0a0a; }
-.intro-section h2 .fade { color: rgba(0,0,0,0.2); }
-.floating-pills { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 56px; }
-.fpill { background: white; border-radius: 100px; padding: 12px 24px; font-size: 14px; font-weight: 500; color: #0a0a0a; opacity: 0; transform: translateY(12px); animation: pillrise 0.5s ease forwards; }
-@keyframes pillrise { to { opacity: 1; transform: translateY(0); } }
-
-/* PHONE MOCKUP */
+ 
+  /* PHONE MOCKUP */
 .phone-shell { width: 280px; background: #1c1c1e; border-radius: 44px; padding: 12px; box-shadow: 0 40px 80px rgba(0,0,0,0.25); }
 .phone-screen { background: white; border-radius: 34px; overflow: hidden; height: 520px; display: flex; flex-direction: column; }
 .phone-header { padding: 16px 12px 12px; text-align: center; border-bottom: 0.5px solid rgba(0,0,0,0.08); background: rgba(249,249,249,0.96); flex-shrink: 0; }
@@ -168,7 +167,7 @@ body { font-family: 'Switzer', -apple-system, sans-serif; color: #0a0a0a; }
 .phone-bubble.them { align-self: flex-start; background: #E9E9EB; color: #000; border-bottom-left-radius: 4px; }
 .phone-bubble.me { align-self: flex-end; background: #007AFF; color: #fff; border-bottom-right-radius: 4px; }
 .phone-footnote { text-align: center; font-size: 10px; color: #8E8E93; margin-top: 4px; }
-
+ 
 /* FEATURE SECTION */
 .feature-section { position: sticky; top: 0; background: #f0f0f2; padding: 0 clamp(24px,6vw,60px); display: flex; align-items: center; overflow: hidden; }
 #problem { z-index: 1; }
@@ -184,9 +183,6 @@ body { font-family: 'Switzer', -apple-system, sans-serif; color: #0a0a0a; }
 .feature-left p { margin-top: 20px; font-size: 16px; color: rgba(11, 11, 11, 0.694); max-width: 480px; line-height: 1.6; }
 .feature-cta { display: flex; gap: 14px; margin-top: auto; flex-wrap: wrap; }
 .chaos-card { border-radius: 24px; height: 520px; padding: 16px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-.chaos-chips { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; max-width: 380px; }
-.chaos-chip { background: rgba(255,255,255,0.06); border: 0.8px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.6); font-size: 14px; padding: 12px 20px; border-radius: 100px; }
-.chaos-arrow { color: rgba(255,255,255,0.3); font-size: 28px; }
 @media (max-width: 768px) {
     .navbar { padding: 12px 20px; }
     .links { display: none; }
@@ -196,30 +192,35 @@ body { font-family: 'Switzer', -apple-system, sans-serif; color: #0a0a0a; }
 .audiences-inner { background: #f5f3ff; overflow: hidden; }
 .audiences-inner .feature-right { overflow: hidden; }
 .audiences-inner .feature-right > div { width: 100%; }
-
-.feature-stack { position: relative; }
-
+ 
+/* BUILT SECTION */
+#built { z-index: 4; position: relative; }
+.built-inner { background: #fefce8; }
+ 
+/* EVERYTHING AFTER THE STICKY STACK */
+.page-end { position: relative; z-index: 10; background: #f0f0f2; }
+ 
 </style>
 </head>
 <body>
-
-
+ 
+ 
   <!-- ==== NAVBAR ==== -->
   <nav class="navbar">
     <div class="brand">ChatterTuber</div>
     <div class="links">
       <a href="#problem">Problem</a>
       <a href="#solution">Solution</a>
-      <a href="#signup">Sign Up</a>
       <a href="#audiences">Audiences</a>
+      <a href="#built">Built</a>
     </div>
-    <button class="nav-cta">Talk to Brian</button>
+    <a href="https://www.chattertuber.com/speak-to-brian" class="nav-cta">Talk to Brian</a>
   </nav>
-
+ 
   <!-- ==== HERO ==== -->
   <section class="hero">
     <div class="hero-inner">
-
+ 
       <!-- Left: copy -->
       <div class="hero-left">
         <div class="eyebrow">ChatterTuber</div>
@@ -228,52 +229,52 @@ body { font-family: 'Switzer', -apple-system, sans-serif; color: #0a0a0a; }
         </h1>
         <p>Meet Brian, Sarah and Marco — AI guides who know every city like a local, ready to answer anything, in your language, day or night.</p>
         <div class="hero-cta">
-          <button class="btn-primary">Talk to Brian →</button>
-          <button class="btn-secondary">See how it works</button>
+          <a href="https://www.chattertuber.com/speak-to-brian" class="btn-primary">Talk to Brian →</a>
+          <a href="#problem" class="btn-secondary">See how it works</a>
         </div>
       </div>
-
+ 
       <!-- Right: persona stack -->
       <div class="hero-right">
         <div class="stack-label">
           <span class="line"></span>
           Meet your guides
         </div>
-
+ 
         <div class="stack">
           <!-- ghost peeks -->
           <div class="ghost-peek ghost-top"></div>
           <div class="ghost-peek ghost-bottom"></div>
-
+ 
           <!-- cards -->
           <div class="char-card card-1">
-            <div class="char-avatar-box">brian.png</div>
+            <div class="char-avatar">B</div>
             <p class="char-name">Brian</p>
             <p class="char-role">The Local Expert</p>
             <p class="char-quote">"Ask me anything about this place — I've got you."</p>
           </div>
-
+ 
           <div class="char-card card-2">
-            <div class="char-avatar-box">sarah.png</div>
+            <div class="char-avatar">S</div>
             <p class="char-name">Sarah</p>
             <p class="char-role">The Hospitality Expert</p>
             <p class="char-quote">"I'll find the best local spots and hidden restaurants."</p>
           </div>
-
+ 
           <div class="char-card card-3">
-            <div class="char-avatar-box">marco.png</div>
+            <div class="char-avatar">M</div>
             <p class="char-name">Marco</p>
             <p class="char-role">The Trail Guide</p>
             <p class="char-quote">"Let's find the best trails and scenic viewpoints."</p>
           </div>
         </div>
-
+ 
         <div class="stack-footer">One assistant. Three specialities.</div>
       </div>
-
+ 
     </div>
   </section>
-
+ 
 <!-- ==== INTRO ==== -->
 <section style="padding: 100px clamp(24px,6vw,80px); background: #f0f0f2; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 60px;">
   <h2 style="font-size: clamp(32px,4.5vw,64px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.08; color: #0a0a0a; max-width: 800px;">Every place has a story. <span style="color: rgba(0,0,0,0.2);">ChatterTuber makes sure every visitor can hear it — instantly.</span></h2>
@@ -293,9 +294,9 @@ body { font-family: 'Switzer', -apple-system, sans-serif; color: #0a0a0a; }
     </div>
   </div>
 </section>
-
+ 
   <!-- ==== FEATURE: PROBLEM ==== -->
-
+ 
   <section class="feature-section" id="problem">
 <div class="feature-inner problem-inner">
 <div class="feature-left">
@@ -303,21 +304,21 @@ body { font-family: 'Switzer', -apple-system, sans-serif; color: #0a0a0a; }
 <h2>Local information is everywhere. <span class="accent">The right answers aren't.</span></h2>
 <p>Scattered across websites, PDFs, maps and social posts. Search results are outdated, incomplete, or in the wrong language. People shouldn't need five tabs open to answer one simple question.</p>
 <div class="feature-cta">
-<button class="btn-primary">See the solution →</button>
-<button class="btn-secondary">Talk to Brian</button>
+<a href="#solution" class="btn-primary">See the solution →</a>
+<a href="https://www.chattertuber.com/speak-to-brian" class="btn-secondary">Talk to Brian</a>
 </div>
 </div>
 <div class="feature-right">
 <div class="chaos-card">
   <img src="images/assistant3.png" alt="AI Assistant" width="100%" height="100%" style="object-fit: cover; border-radius: 24px;" />
 </div>
-
+ 
 </div>
 </div>
 </section>
-
+ 
   <!-- ==== FEATURE: SOLUTION ==== -->
-
+ 
 <section class="feature-section" id="solution">
 <div class="feature-inner solution-inner">
 <div class="feature-left">
@@ -325,8 +326,8 @@ body { font-family: 'Switzer', -apple-system, sans-serif; color: #0a0a0a; }
 <h2>A digital human that knows everything about your place.</h2>
 <p>ChatterTuber turns trusted local knowledge into a conversational AI avatar — accessible through any browser, in any language, with no app download required.</p>
 <div class="feature-cta">
-<button class="btn-primary">Talk to Brian →</button>
-<button class="btn-secondary">See how it works</button>
+<a href="https://www.chattertuber.com/speak-to-brian" class="btn-primary">Talk to Brian →</a>
+<a href="#audiences" class="btn-secondary">Who it's for</a>
 </div>
 </div>
 <div class="feature-right">
@@ -344,9 +345,9 @@ body { font-family: 'Switzer', -apple-system, sans-serif; color: #0a0a0a; }
 </div>
 </div>
 </section>
-
+ 
 <!-- ==== FEATURE: AUDIENCES ==== -->
-
+ 
 <section class="feature-section" id="audiences">
 <div class="feature-inner audiences-inner">
 <div class="feature-left">
@@ -354,8 +355,8 @@ body { font-family: 'Switzer', -apple-system, sans-serif; color: #0a0a0a; }
 <h2>Built for every kind of <span style="color: #7c3aed;">local connection.</span></h2>
 <p>Whether you're welcoming tourists, serving locals, or managing a destination — ChatterTuber speaks your audience's language.</p>
 <div class="feature-cta">
-<button class="btn-primary">Talk to Brian →</button>
-<button class="btn-secondary">See how it works</button>
+<a href="https://www.chattertuber.com/speak-to-brian" class="btn-primary">Talk to Brian →</a>
+<a href="#built" class="btn-secondary">See what's built</a>
 </div>
 </div>
 <div class="feature-right">
@@ -364,12 +365,10 @@ body { font-family: 'Switzer', -apple-system, sans-serif; color: #0a0a0a; }
 </div>
 </div>
 </div>
-</div>
 </section>
-
-
+ 
+ 
 <!-- ==== FEATURE: BUILT ==== -->
- <div class="feature-stack">
 <section class="feature-section" id="built">
 <div class="feature-inner built-inner">
 <div class="feature-left">
@@ -377,8 +376,7 @@ body { font-family: 'Switzer', -apple-system, sans-serif; color: #0a0a0a; }
 <h2>Already built. <span style="color: #a16207;">Ready to deploy.</span></h2>
 <p>ChatterTuber isn't a concept — it's a working product. The deployment workflow exists, the avatar is live, and your location can be next. No studio sessions, no hardware, no app downloads required.</p>
 <div class="feature-cta">
-<button class="btn-primary">Talk to Brian →</button>
-<button class="btn-secondary">See how it works</button>
+<a href="https://www.chattertuber.com/speak-to-brian" class="btn-primary">Talk to Brian →</a>
 </div>
 </div>
 <div class="feature-right">
@@ -388,20 +386,45 @@ body { font-family: 'Switzer', -apple-system, sans-serif; color: #0a0a0a; }
 </div>
 </div>
 </section>
-</div>
-
-  <!-- ==== TAGLINE ==== -->
-
-  <section class="tagline-section">
-    <h2>Built once, <span>localised anywhere.</span></h2>
-    <p>One guide, every language, every city — no rebuilding required.</p>
+ 
+<!-- ==== EVERYTHING BELOW SITS ABOVE THE STICKY STACK ==== -->
+<div class="page-end">
+ 
+ 
+  <!-- ==== FINAL CTA ==== -->
+  <section style="padding: 60px clamp(24px,6vw,80px) 140px; text-align: center;">
+    <h2 style="font-size: clamp(32px,4.5vw,64px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.08; max-width: 760px; margin: 0 auto;">Questions? <span style="color: #4ade80;">Ask Brian.</span></h2>
+    <p style="margin: 24px auto 0; font-size: 18px; color: rgba(0,0,0,0.5); max-width: 560px;">Built once, localised anywhere. Brian is live right now — ask him anything about ChatterTuber, or about the place you're standing in.</p>
+    <div style="margin-top: 40px;">
+      <a href="https://www.chattertuber.com/speak-to-brian" class="btn-primary" style="font-size: 17px; padding: 18px 34px;">Ask Brian now →</a>
+    </div>
   </section>
-
+ 
+  <!-- ==== FOOTER ==== -->
+  <footer style="background: #ffffff; border-top: 0.8px solid rgba(0,0,0,0.08); padding: 48px clamp(24px,6vw,80px); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 24px;">
+    <div>
+      <div style="font-size: 17px; font-weight: 700;">ChatterTuber</div>
+      <p style="margin-top: 6px; font-size: 13px; color: rgba(0,0,0,0.45);">Local knowledge, spoken in every language.</p>
+    </div>
+    <div style="display: flex; gap: 28px; font-size: 14px;">
+      <a href="#problem" style="color: rgba(0,0,0,0.6); text-decoration: none;">Problem</a>
+      <a href="#solution" style="color: rgba(0,0,0,0.6); text-decoration: none;">Solution</a>
+      <a href="#audiences" style="color: rgba(0,0,0,0.6); text-decoration: none;">Audiences</a>
+      <a href="#built" style="color: rgba(0,0,0,0.6); text-decoration: none;">Built</a>
+    </div>
+    <div style="font-size: 13px; color: rgba(0,0,0,0.45); text-align: right;">
+      <div>T: Conrad +64 27 282 4578</div>
+      <div style="margin-top: 4px;">© 2026 ChatterTuber</div>
+    </div>
+  </footer>
+ 
+</div>
+ 
 <script>
   const words = ["guide", "assistant", "helper", "navigator", "expert"];
   let index = 0;
   const wordElement = document.getElementById("rotating-word");
-
+ 
   setInterval(() => {
     wordElement.classList.add("fade-out");
     setTimeout(() => {
@@ -411,6 +434,6 @@ body { font-family: 'Switzer', -apple-system, sans-serif; color: #0a0a0a; }
     }, 280);
   }, 2600);
 </script>
-
+ 
 </body>
 </html>
