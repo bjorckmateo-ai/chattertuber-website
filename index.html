@@ -222,7 +222,7 @@ body {
 .phone-footnote { text-align: center; font-size: 10px; color: #8E8E93; margin-top: 4px; }
  
 /* FEATURE SECTION */
-.feature-section { position: sticky; top: 0; scroll-margin-top: 88px; background: var(--page-gradient); background-attachment: fixed; padding: 0 clamp(24px,6vw,60px); display: flex; align-items: center; overflow: hidden; }
+.feature-section { position: sticky; top: 0; scroll-margin-top: 88px; background: var(--page-gradient); background-attachment: fixed; padding: 30px clamp(24px,6vw,60px); display: flex; align-items: center; overflow: hidden; }
 #problem { z-index: 1; }
 #solution { z-index: 2; }
   .feature-inner { color: #0a0a0a; border: 0.8px solid rgba(255,255,255,0.16); border-radius: 32px; display: flex; flex-wrap: wrap; align-items: stretch; justify-content: space-between; gap: 60px; max-width: 1232px; margin: 0 auto; padding: 48px 56px; width: 100%; box-shadow: 0 24px 54px rgba(0,0,0,0.26); }
@@ -294,7 +294,7 @@ body {
  
   <!-- ==== NAVBAR ==== -->
   <nav class="navbar">
-    <div class="brand" style="display: flex; align-items: center; gap: 10px;"><img src="images/logo.png" alt="ChatterTuber" style="height: 34px; width: auto;">ChatterTuber</div>
+    <div class="brand" style="display: flex; align-items: center; gap: 12px;"><img src="images/ctmark.png" alt="" style="height: 40px; width: auto;"><img src="images/wordmark.png" alt="ChatterTuber" style="height: 26px; width: auto;"></div>
     <div class="links">
       <a href="#problem">Problem</a>
       <a href="#solution">Solution</a>
@@ -321,42 +321,9 @@ body {
         </div>
       </div>
  
-      <!-- Right: persona stack -->
-      <div class="hero-right">
-        <div class="stack-label">
-          <span class="line"></span>
-          Meet your guides
-        </div>
- 
-        <div class="stack">
-          <!-- ghost peeks -->
-          <div class="ghost-peek ghost-top"></div>
-          <div class="ghost-peek ghost-bottom"></div>
- 
-          <!-- cards -->
-          <div class="char-card card-1">
-            <div class="char-avatar">B</div>
-            <p class="char-name">Brian</p>
-            <p class="char-role">The Local Expert</p>
-            <p class="char-quote">"Ask me anything about this place — I've got you."</p>
-          </div>
- 
-          <div class="char-card card-2">
-            <div class="char-avatar">S</div>
-            <p class="char-name">Sarah</p>
-            <p class="char-role">The Hospitality Expert</p>
-            <p class="char-quote">"I'll find the best local spots and hidden restaurants."</p>
-          </div>
- 
-          <div class="char-card card-3">
-            <div class="char-avatar">M</div>
-            <p class="char-name">Marco</p>
-            <p class="char-role">The Trail Guide</p>
-            <p class="char-quote">"Let's find the best trails and scenic viewpoints."</p>
-          </div>
-        </div>
- 
-        <div class="stack-footer">One assistant. Three specialities.</div>
+      <!-- Right: brand lockup -->
+      <div class="hero-right" style="flex: 0 1 460px; justify-content: center;">
+        <img src="images/logo-lockup.png" alt="ChatterTuber" style="width: min(460px, 80vw); height: auto; filter: drop-shadow(0 24px 48px rgba(0,0,0,0.45));">
       </div>
  
     </div>
